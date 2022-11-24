@@ -2,15 +2,27 @@ local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/TORVE
 local Flags = Library.Flags
 
 local Window = Library:Window({
-   Text = "Baseplate"
+   Text = "Console"
 })
 
 local Tab = Window:Tab({
-   Text = "Aiming"
+   Text = "Home"
 })
 
 local Tab2 = Window:Tab({
-   Text = "Visual"
+   Text = "Auto-Farm"
+})
+
+local Tab3 = Window:Tab({
+   Text = "Players"
+})
+
+local Tab4 = Window:Tab({
+   Text = "Teleports"
+})
+
+local Tab5 = Window:Tab({
+   Text = "Misc"
 })
 
 local Section = Tab:Section({
