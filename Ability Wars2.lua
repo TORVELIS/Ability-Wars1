@@ -1,135 +1,72 @@
+local CoreGui = game.CoreGui
+
+local function DestroyGui()
+    CoreGui.PPHUD:Destroy()
+end
+
+if CoreGui:FindFirstChild("PPHUD") then
+    DestroyGui()
+end
+
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/TORVELIS/PPHub/main/Lib.lua'))()
 local Flags = Library.Flags
 
 local Window = Library:Window({
-   Text = "Console"
+  Text = "Console"
 })
 
 local Tab = Window:Tab({
    Text = "Home"
 })
 
-local Tab2 = Window:Tab({
-   Text = "Auto-Farm"
+local Section1 = Tab:Section({
+    Text = "About",
+    Side = "Left"
 })
 
-local Tab3 = Window:Tab({
-   Text = "Players"
+Section1:Label({
+    Text = "Credits: nae & torvelis",
+    Color = Color3.fromRGB(255,255,255)
 })
 
-local Tab4 = Window:Tab({
-   Text = "Teleports"
+Section1:Label({
+    Text = "Menu Toggle: Left Alt",
+    Color = Color3.fromRGB(255,255,255)
 })
 
-local Tab5 = Window:Tab({
-   Text = "Misc"
-})
-
-local Section = Tab:Section({
-   Text = "Aiming"
-})
-
-local Section2 = Tab:Section({
-   Text = "Anti-Aim"
-})
-
-local Section3 = Tab:Section({
-   Text = "Ragebot",
-   Side = "Right"
-})
-
-Section:Check({
-   Text = "Aimbot",
-   Flag = "Aimbot"
-})
-
-Section:Check({
-   Text = "Silent-Aim",
-   Callback = function(bool)
-       warn(bool)
-   end
-})
-
-Section:Dropdown({
-   Text = "Body Part",
-   List = {"Head", "Torso", "Random"},
-   Callback = function(opt)
-       warn(opt)
-   end
-})
-
-Section:Slider({
-   Text = "Hit Chance",
-   Minimum = 0,
-   Default = 60,
-   Maximum = 100,
-   Postfix = "%",
-   Callback = function(n)
-       warn(n)
-   end
-})
-
-Section:Button({
-   Text = "Spawn",
+Section1:Button({
+   Text = "Copy Discord link",
    Callback = function()
-       warn("Settings Reseted.")
+       setclipboard("discord.gg/QzgbdcXYaP")
    end
+})
+
+Tab2 = Window:Tab({
+    Text = "Main"
+})
+
+local Section2 = Tab2:Section({
+    Text = "Autofarm",
+    Side = "Left"
 })
 
 Section2:Check({
-   Text = "Spin"
-})
-
-Section2:Slider({
-   Text = "Pitch Offset",
-   Minimum = 100,
-   Default = 150,
-   Maximum = 500,
-   Callback = function(n)
-       warn(n)
-   end
-})
-
-Section2:Slider({
-   Text = "Yaw Offset",
-   Minimum = 100,
-   Default = 150,
-   Maximum = 500,
-   Callback = function(n)
-       warn(n)
-   end
-})
-
-Section2:Button({
-   Text = "Resolve Positions"
-})
-
-Section3:Check({
-   Text = "Auto-Wall",
+   Text = "Attach to nearest",
    Callback = function(bool)
        warn(bool)
    end
 })
 
-Section3:Check({
-   Text = "Trigger Bot"
+local Section3 = Tab2:Section({
+    Text = "Other",
+    Side = "Right"
 })
 
-Section3:Check({
-   Text = "Insta-Kill"
-})
-
-Section3:Dropdown({
-   Text = "Hitscan Directions",
-   List = {"Left", "Right", "Up", "Down", "All"},
-   Callback = function(opt)
-       warn(opt)
-   end
-})
-
-Section3:Label({
-   Text = "Status: Undetected",
-   Color = Color3.fromRGB(100, 190, 31)
+Section3:Button({
+    Text = "Add platforms"
+    Callback = function()
+        
+    end
 })
 
 Tab:Select()
