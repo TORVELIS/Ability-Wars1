@@ -1,4 +1,9 @@
 local CoreGui = game.CoreGui
+local PlaceId = game.PlaceId
+
+if PlaceId ~= 8260276694 then
+    game.Players.LocalPlayer:Kick("Wrong game")
+end
 
 local function DestroyGui()
     CoreGui.PPHUD:Destroy()
@@ -63,9 +68,9 @@ local Section3 = Tab2:Section({
 })
 
 Section3:Button({
-    Text = "Add platforms"
+    Text = "Add platforms",
     Callback = function()
-        
+        print("")
     end
 })
 
