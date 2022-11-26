@@ -67,9 +67,10 @@ local function Punch(char)
 end
 
 local function AttachAndKill()
+    print("a")
     local target_hrp = findNearestHrp()
-    
     if target_hrp then
+        print("b")
         repeat
             task.wait()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target_hrp.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * getgenv().distance_from_target
@@ -158,7 +159,6 @@ end
 -- threads
 spawn(function()
     while true do
-        print("a")
         if getgenv().attach_to_nearest then
             game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").ActivateStarted:FireServer("Normal")
             AttachAndKill()
@@ -170,7 +170,6 @@ end)
 
 spawn(function()
     while true do
-        print("b")
         if getgenv().hitbox_extender then
             ExtendHMR()
         else
