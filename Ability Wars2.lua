@@ -28,7 +28,7 @@ local function inSafezone(char) -- returns true if player is in safezone, false 
 end
 
 function findNearestHrp()
-    local dist = 1000
+    local dist = 10000
     local targetroot = nil
     local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
     
@@ -36,7 +36,7 @@ function findNearestHrp()
         if v.Character and v.Name ~= game.Players.LocalPlayer.Name then
             if v.Character:FindFirstChild("HumanoidRootPart") then
                 local target_Hrp = v.Character.HumanoidRootPart
-                if target_Hrp and not inSafezone(v.Character) then
+                if target_Hrp and not inSafezone(v.Character) and target_hrp.Parent.Humanoid.Health > 0 then
                     local temp_dist = (hrp.Position - target_Hrp.Position).Magnitude
                     if temp_dist <= dist then
                         dist = temp_dist
