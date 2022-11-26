@@ -4,7 +4,7 @@ local PlaceId = game.PlaceId
 -- global variables
 getgenv().attach_to_nearest = false
 getgenv().PlatformAdd = nil
-getgenv().distance_from_target = -3
+getgenv().distance_from_target = 3
 
 -- other lol
 
@@ -177,6 +177,19 @@ Section2:Check({
         getgenv().attach_to_nearest = bool
     end
  })
+
+ Section2:Slider({
+   Text = "Distance from Target",
+   Minimum = -10,
+   Default = 3,
+   Maximum = 10,
+   Postfix = " Studs",
+   Callback = function(S)
+      getgenv().distance_from_target = S
+   end
+
+   
+})
 
 local Section3 = Tab2:Section({
     Text = "Other",
