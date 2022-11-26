@@ -222,7 +222,7 @@ local Section2 = Tab2:Section({
 })
 
 Section2:Check({
-    Text = "Attach to nearest",
+    Text = "Attach to nearest (kick warning)",
     Callback = function(bool)
         getgenv().attach_to_nearest = bool
     end
@@ -231,7 +231,7 @@ Section2:Check({
 Section2:Slider({
    Text = "Distance from Target",
    Minimum = -10,
-   Default = 3,
+   Default = -3,
    Maximum = 10,
    Postfix = " Studs",
    Callback = function(S)
@@ -323,8 +323,6 @@ local Section4 = tab3:Section({
    Text = "Main",
    Side = "Left",
 })
-
-
 
 Section4:Label({
    Text = ""
