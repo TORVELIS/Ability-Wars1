@@ -74,7 +74,7 @@ end
 
 local function RemovePlatforms()
     for _,v in pairs(game.Workspace:GetChildren()) do
-        if v.Name == "SpawnPlatformlol" or v.Name == "SpleefPlatformFuckerEzKidLoL" then
+        if v.Name == "SpawnPlatformlol" or v.Name == "SpleefPlatformFuckerEzKidLoL" or v.Name == "ArenaFuckShitLoLKillYourself" then
             v:Destroy()
         end
     end
@@ -99,6 +99,15 @@ local function PlatformOnSpawn(Selected)
       Cl.Name = "SpleefPlatformFuckerEzKidLoL"
       
       Cl.CFrame = Cl.CFrame * CFrame.new(Vector3.new(-19117.9746, -26.96139812, -57.5339622, -0.981866181, -7.51963753e-08, -0.189575449, -7.40857189e-08, 1, -1.29453523e-08, 0.189575449, 1.33422928e-09, -0.981866181))
+      Cl.Size = Vector3.new(1060,1,1060)
+      Cl.Transparency = 0.5
+
+   elseif Selected == "Arena" then
+      if Workspace:FindFirstChild("ArenaFuckShitLoLKillYourself") then return end
+      local Cl = game:GetService("Workspace").Main["Map Base"].Mainplate:Clone()
+      Cl.Parent = game.Workspace
+      Cl.Name = "ArenaFuckShitLoLKillYourself"
+      Cl.CFrame = Cl.CFrame * CFrame.new(Vector3.new(21713.9199, -22.11111111, 2.62695408, -0.00158537854, -1.06568841e-07, -0.999998748, 3.39828554e-10, 1, -1.06569516e-07, 0.999998748, -5.08781184e-10, -0.00158537854))
       Cl.Size = Vector3.new(1060,1,1060)
       Cl.Transparency = 0.5
 
@@ -186,7 +195,7 @@ Section3:Button({
     Text = "Add Platform",
     Callback = function()
         if getgenv().PlatformAdd == "Arena Platform" then
-            print("Arena not work yet lol")
+         PlatformOnSpawn("Arena")
         elseif getgenv().PlatformAdd == "Spawn Platform" then
             PlatformOnSpawn("Spawn")
         elseif getgenv().PlatformAdd == "Spleef Platform" then
