@@ -34,15 +34,17 @@ local function inSafezone(char) -- returns true if player is in safezone, false 
 end
 
 function findNearestHrp()
-    local dist = 10000
+    local dist = 2000
     local targetroot = nil
     local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+    print(b)
     
     for _,v in pairs(game.Players:GetPlayers()) do
         if v.Character and v.Name ~= game.Players.LocalPlayer.Name then
             if v.Character:FindFirstChild("HumanoidRootPart") then
                 local target_Hrp = v.Character.HumanoidRootPart
                 if target_Hrp and not inSafezone(v.Character) and target_hrp.Parent.Humanoid.Health > 0 then
+                    print(c)
                     local temp_dist = (hrp.Position - target_Hrp.Position).Magnitude
                     if temp_dist <= dist then
                         dist = temp_dist
@@ -70,7 +72,7 @@ local function AttachAndKill()
     print("a")
     local target_hrp = findNearestHrp()
     if target_hrp then
-        print("b")
+        print("d")
         repeat
             task.wait()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target_hrp.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * getgenv().distance_from_target
