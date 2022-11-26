@@ -8,7 +8,6 @@ getgenv().visibleHMR = false
 getgenv().PlatformAdd = nil
 getgenv().distance_from_target = 3
 
-
 -- other lol
 
 local function RejoinGame()
@@ -124,10 +123,18 @@ end
 local function ExtendHMR()
     for i,v in pairs(game.Players:GetPlayers()) do
         if v ~= game.Players.LocalPlayer then
-            v.Character.HumanoidRootPart.Size = Vector3.new(20,20,20)
-            if getgenv().visibleHMR then
-                v.Character.HumanoidRootPart.Transparency = 0.7
-                v.Character.HumanoidRootPart.Color = Color3.fromRGB(255,0,0)
+            local target_char = v.Character
+            if target_char then
+                local target_hmr = target_char:FindFirstChild("HumanoidRootPart")
+                if target_hmr then
+                    target_hmr.Size = Vector3.new(20,20,20)
+                    if getgenv().visibleHMR then
+                        target_hmr.Transparency = 0.7
+                        target_hmr.Color = Color3.fromRGB(255,0,0)
+                    else
+                        target_hmr.Transparency = 1
+                    end
+                end
             end
         end
     end
@@ -136,9 +143,14 @@ end
 local function UnExtendHMR()
     for i,v in pairs(game.Players:GetPlayers()) do
         if v ~= game.Players.LocalPlayer then
-            v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
-            v.Character.HumanoidRootPart.Transparency = 1
-            v.Character.HumanoidRootPart.Color = Color3.fromRGB(255,0,0)
+            local target_char = v.Character
+            if target_char then
+                local target_hmr = target_char:FindFirstChild("HumanoidRootPart")
+                if target_hmr then
+                    target_hmr.Size = Vector3.new(2,2,1)
+                    target_hmr.Transparency = 1
+                end
+            end
         end
     end
 end
@@ -157,7 +169,6 @@ end)
 
 spawn(function()
     while true do
-      print("A")
         if getgenv().hitbox_extender then
             ExtendHMR()
         else
