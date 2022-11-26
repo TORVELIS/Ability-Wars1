@@ -194,7 +194,7 @@ local Section3 = Tab2:Section({
     Side = "Right"
 })
 
-Section2:Slider({
+Section3:Slider({
     Text = "WalkSpeed",
     Minimum = 16,
     Default = 16,
@@ -204,7 +204,7 @@ Section2:Slider({
     end
 })
 
-Section2:Slider({
+Section3:Slider({
     Text = "JumpPower",
     Minimum = 50,
     Default = 50,
