@@ -27,7 +27,6 @@ if PlaceId ~= 8260276694 then
 end
 
 local function inSafezone(char) -- returns true if player is in safezone, false if not
-    print("e")
     if (char.HumanoidRootPart.Position - Vector3.new(70.7707, 257.81, -4.45903)).magnitude < 100 then
         return true
     end
@@ -38,15 +37,12 @@ function findNearestHrp()
     local dist = 2000
     local targetroot = nil
     local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    print("b")
     
     for _,v in pairs(game.Players:GetPlayers()) do
         if v.Character and v.Name ~= game.Players.LocalPlayer.Name then
             if v.Character:FindFirstChild("HumanoidRootPart") then
-                print("c")
-                local target_Hrp = v.Character.HumanoidRootPart
-                if target_Hrp and not inSafezone(v.Character) and target_hrp.Parent.Humanoid.Health > 0 then
-                    print("d")
+                local target_Hrp = v.Character:FindFirstChild("HumanoidRootPart")
+                if target_Hrp and not inSafezone(v.Character) and v.Character.Humanoid.Health > 0 then
                     local temp_dist = (hrp.Position - target_Hrp.Position).Magnitude
                     if temp_dist <= dist then
                         dist = temp_dist
@@ -71,10 +67,8 @@ local function Punch(char)
 end
 
 local function AttachAndKill()
-    print("a")
     local target_hrp = findNearestHrp()
     if target_hrp then
-        print("g")
         repeat
             task.wait()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target_hrp.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * getgenv().distance_from_target
@@ -163,14 +157,11 @@ end
 -- threads
 spawn(function()
     while true do
-        local s,e = pcall(function()
-            if getgenv().attach_to_nearest then
-                game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").ActivateStarted:FireServer("Normal")
-                AttachAndKill()
-                task.wait(3)
-            end
-        end)
-        if not s then warn(e) end
+        if getgenv().attach_to_nearest then
+            game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").ActivateStarted:FireServer("Normal")
+            AttachAndKill()
+            task.wait(3)
+        end
         task.wait(.5)
     end
 end)
