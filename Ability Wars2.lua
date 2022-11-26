@@ -214,6 +214,10 @@ Section3:Slider({
     end
 })
 
+Section3:Label({
+Text = ""
+})
+
 Section3:Dropdown({
     Text = "Platform",
     List = {"Arena Platform", "Spawn Platform", "Spleef Platform"},
@@ -238,6 +242,30 @@ Section3:Button({
 Section3:Button({
     Text = "Remove Platforms",
     Callback = RemovePlatforms
+})
+
+
+local tab3 = Window:Tab({
+   Text = "Misc",
+})
+
+
+local Section4 = tab3:Section({
+   Text = "Main",
+   Side = "Left",
+})
+
+Section4:Label({
+   Text = ""
+})
+Section4:Button({
+   Text = "Unload GUI",
+   Callback = DestroyGui
+
+})
+local Section5 = tab3:Section({
+   Text = "Visuals",
+   Side = "Right",
 })
 
 Tab:Select()
