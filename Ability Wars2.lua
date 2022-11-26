@@ -46,7 +46,7 @@ function findNearestHrp()
                 print("c")
                 local target_Hrp = v.Character.HumanoidRootPart
                 if target_Hrp and not inSafezone(v.Character) and target_hrp.Parent.Humanoid.Health > 0 then
-                    print("f")
+                    print("d")
                     local temp_dist = (hrp.Position - target_Hrp.Position).Magnitude
                     if temp_dist <= dist then
                         dist = temp_dist
@@ -163,11 +163,14 @@ end
 -- threads
 spawn(function()
     while true do
-        if getgenv().attach_to_nearest then
-            game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").ActivateStarted:FireServer("Normal")
-            AttachAndKill()
-            task.wait(3)
-        end
+        local s,e = pcall(function()
+            if getgenv().attach_to_nearest then
+                game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").ActivateStarted:FireServer("Normal")
+                AttachAndKill()
+                task.wait(3)
+            end
+        end)
+        if not s then warn(e) end
         task.wait(.5)
     end
 end)
