@@ -189,6 +189,53 @@ Section2:Slider({
    end
 })
 
+Section2:Label({
+    Text = "Range changer, must click Set button everytime you die.",
+    Color = Color3.fromRGB(255,255,255)
+})
+
+local rX, rY, rZ = 1.5, 1.5, 2;
+
+Section2:Slider({
+    Text = "Range X",
+    Minimum = 1.5,
+    Default = 1.5,
+    Maximum = 20,
+    Postfix = "",
+    Callback = function(S)
+       rX = S
+    end
+})
+
+Section2:Slider({
+    Text = "Range Y",
+    Minimum = 1.5,
+    Default = 1.5,
+    Maximum = 20,
+    Postfix = "",
+    Callback = function(S)
+       rY = S
+    end
+})
+
+Section2:Slider({
+    Text = "Range Z",
+    Minimum = 2,
+    Default = 2,
+    Maximum = 20.5,
+    Postfix = "",
+    Callback = function(S)
+       rZ = S
+    end
+})
+
+Section2:Button({
+    Text = "Set range",
+    Callback = function()
+        game.Players.LocalPlayer.Character:FindFirstChild("Hitbox").Size = Vector3.new(rX, rY, rZ)
+    end
+})
+
 local Section3 = Tab2:Section({
     Text = "Other",
     Side = "Right"
@@ -254,8 +301,6 @@ local Section4 = tab3:Section({
    Text = "Main",
    Side = "Left",
 })
-
-
 
 Section4:Label({
    Text = ""
