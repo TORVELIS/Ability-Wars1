@@ -178,7 +178,7 @@ Section2:Check({
     end
  })
 
- Section2:Slider({
+Section2:Slider({
    Text = "Distance from Target",
    Minimum = -10,
    Default = 3,
@@ -187,13 +187,31 @@ Section2:Check({
    Callback = function(S)
       getgenv().distance_from_target = S
    end
-
-   
 })
 
 local Section3 = Tab2:Section({
     Text = "Other",
     Side = "Right"
+})
+
+Section2:Slider({
+    Text = "WalkSpeed",
+    Minimum = 16,
+    Default = 16,
+    Maximum = 200,
+    Callback = function(S)
+       game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = S
+    end
+})
+
+Section2:Slider({
+    Text = "JumpPower",
+    Minimum = 50,
+    Default = 50,
+    Maximum = 200,
+    Callback = function(S)
+       game.Players.LocalPlayer.Character.Humanoid.JumpPower = S
+    end
 })
 
 Section3:Dropdown({
