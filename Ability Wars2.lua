@@ -3,6 +3,8 @@ local PlaceId = game.PlaceId
 
 -- global variables
 getgenv().attach_to_nearest = false
+getgenv().hitbox_extender = false
+getgenv().visibleHMR = false
 getgenv().PlatformAdd = nil
 getgenv().distance_from_target = 3
 
@@ -114,6 +116,29 @@ local function PlatformOnSpawn(Selected)
    end
 end
 
+local function ExtendHMR()
+    for i,v in pairs(game.Players:GetPlayers()) do
+        if v ~= game.Players.LocalPlayer then
+            print(v)
+            v.Character.HumanoidRootPart.Size = Vector3.new(25,25,25)
+            if getgenv().visibleHMR then
+                v.Character.HumanoidRootPart.Transparency = 0.7
+                v.Character.HumanoidRootPart.Color = Color3.fromRGB(255,0,0)
+            end
+        end
+    end
+end
+
+local function UnExtendHMR()
+    for i,v in pairs(game.Players:GetPlayers()) do
+        if v ~= game.Players.LocalPlayer then
+            print(v)
+            v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
+            v.Character.HumanoidRootPart.Transparency = 1
+            v.Character.HumanoidRootPart.Color = Color3.fromRGB(255,0,0)
+        end
+    end
+end
 
 -- threads
 spawn(function()
@@ -126,6 +151,17 @@ spawn(function()
         end
     end
 end)
+
+spawn(function()
+    while true do
+        if getgenv().hitbox_extender then
+            ExtendHMR()
+        else
+            UnExtendHMR()
+        end
+        task.wait(1)
+    end
+end
 
 -- ui
 
@@ -167,7 +203,7 @@ Tab2 = Window:Tab({
 })
 
 local Section2 = Tab2:Section({
-    Text = "Autofarm",
+    Text = "Main",
     Side = "Left"
 })
 
@@ -190,49 +226,21 @@ Section2:Slider({
 })
 
 Section2:Label({
-    Text = "Range changer, must click Set button everytime you die.",
+    Text = "",
     Color = Color3.fromRGB(255,255,255)
 })
 
-local rX, rY, rZ = 1.5, 1.5, 2;
-
-Section2:Slider({
-    Text = "Range X",
-    Minimum = 1.5,
-    Default = 1.5,
-    Maximum = 20,
-    Postfix = "",
-    Callback = function(S)
-       rX = S
+Section2:Check({
+    Text = "Extended hitboxes",
+    Callback = function(bool)
+        getgenv().hitbox_extender = bool
     end
 })
 
-Section2:Slider({
-    Text = "Range Y",
-    Minimum = 1.5,
-    Default = 1.5,
-    Maximum = 20,
-    Postfix = "",
-    Callback = function(S)
-       rY = S
-    end
-})
-
-Section2:Slider({
-    Text = "Range Z",
-    Minimum = 2,
-    Default = 2,
-    Maximum = 20.5,
-    Postfix = "",
-    Callback = function(S)
-       rZ = S
-    end
-})
-
-Section2:Button({
-    Text = "Set range",
-    Callback = function()
-        game.Players.LocalPlayer.Character:FindFirstChild("Hitbox").Size = Vector3.new(rX, rY, rZ)
+Section2:Check({
+    Text = "Visible hitboxes",
+    Callback = function(bool)
+        getgenv().visibleHMR = bool
     end
 })
 
