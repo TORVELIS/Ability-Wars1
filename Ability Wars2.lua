@@ -161,7 +161,7 @@ spawn(function()
         end
         task.wait(1)
     end
-end
+end)
 
 -- ui
 
