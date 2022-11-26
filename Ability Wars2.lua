@@ -6,7 +6,7 @@ getgenv().attach_to_nearest = false
 getgenv().hitbox_extender = false
 getgenv().visibleHMR = false
 getgenv().PlatformAdd = nil
-getgenv().distance_from_target = 3
+getgenv().distance_from_target = -3
 
 -- other lol
 
@@ -158,17 +158,19 @@ end
 -- threads
 spawn(function()
     while true do
-        task.wait()
+        print("a")
         if getgenv().attach_to_nearest then
             game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").ActivateStarted:FireServer("Normal")
             AttachAndKill()
             task.wait(3)
         end
+        task.wait(.5)
     end
 end)
 
 spawn(function()
     while true do
+        print("b")
         if getgenv().hitbox_extender then
             ExtendHMR()
         else
