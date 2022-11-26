@@ -1,6 +1,6 @@
 local CoreGui = game.CoreGui
 local PlaceId = game.PlaceId
-
+local TeleportService = game:GetService("TeleportService")
 -- global variables
 getgenv().attach_to_nearest = false
 getgenv().hitbox_extender = false
@@ -8,7 +8,12 @@ getgenv().visibleHMR = false
 getgenv().PlatformAdd = nil
 getgenv().distance_from_target = 3
 
+
 -- other lol
+
+local function RejoinGame()
+   TeleportService:Teleport(PlaceId)
+end
 
 local function DestroyGui()
     CoreGui.PPHUD:Destroy()
@@ -119,8 +124,7 @@ end
 local function ExtendHMR()
     for i,v in pairs(game.Players:GetPlayers()) do
         if v ~= game.Players.LocalPlayer then
-            print(v)
-            v.Character.HumanoidRootPart.Size = Vector3.new(25,25,25)
+            v.Character.HumanoidRootPart.Size = Vector3.new(20,20,20)
             if getgenv().visibleHMR then
                 v.Character.HumanoidRootPart.Transparency = 0.7
                 v.Character.HumanoidRootPart.Color = Color3.fromRGB(255,0,0)
@@ -132,7 +136,6 @@ end
 local function UnExtendHMR()
     for i,v in pairs(game.Players:GetPlayers()) do
         if v ~= game.Players.LocalPlayer then
-            print(v)
             v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
             v.Character.HumanoidRootPart.Transparency = 1
             v.Character.HumanoidRootPart.Color = Color3.fromRGB(255,0,0)
@@ -154,12 +157,13 @@ end)
 
 spawn(function()
     while true do
+      print("A")
         if getgenv().hitbox_extender then
             ExtendHMR()
         else
             UnExtendHMR()
         end
-        task.wait(1)
+        task.wait(0.5)
     end
 end)
 
@@ -310,9 +314,18 @@ local Section4 = tab3:Section({
    Side = "Left",
 })
 
+
+
 Section4:Label({
    Text = ""
 })
+
+Section4:Button({
+   Text = "Rejoin",
+   Callback = RejoinGame
+
+})
+
 Section4:Button({
    Text = "Unload GUI",
    Callback = DestroyGui
