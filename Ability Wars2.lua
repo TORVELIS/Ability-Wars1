@@ -156,6 +156,15 @@ end
 
 local function RemoveNametag()
     game.Players.LocalPlayer.Character:FindFirstChild("Head")["Name Tag"].TextLabel:Destroy()
+    game.Players.LocalPlayer.Character:FindFirstChild("Head").face:Destroy()
+    for _,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        local Handle = v:FindFirstChild("Handle")
+        if Handle then
+            if not v:IsA("Tool") then
+                Handle:Destroy()
+            end
+        end
+    end
 end  
 
 -- threads
