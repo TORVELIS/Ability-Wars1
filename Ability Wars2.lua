@@ -154,6 +154,10 @@ local function UnExtendHMR()
     end
 end
 
+local function RemoveNametag()
+    game.Players.LocalPlayer.Character:FindFirstChild("Head")["Name Tag"].TextLabel:Destroy()
+end  
+
 -- threads
 spawn(function()
     while true do
@@ -322,6 +326,11 @@ local tab3 = Window:Tab({
 local Section4 = tab3:Section({
    Text = "Main",
    Side = "Left",
+})
+
+Section4:Button({
+    Text = ("Remove nametag"),
+    Callback = RemoveNametag
 })
 
 Section4:Label({
