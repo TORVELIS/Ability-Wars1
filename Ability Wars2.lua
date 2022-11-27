@@ -328,6 +328,57 @@ local Section4 = tab3:Section({
    Side = "Left",
 })
 
+local selectedQuest = nil
+
+-- move this up later
+local quest_functions = {
+    ["Wood shack"] = function()
+        print("wood shack quest")
+        local args = {
+            [1] = "Buy an Item from the Wood Shack"
+        }
+        game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").RequestQuestEvent:InvokeServer(unpack(args))
+        task.wait(1)
+        local args = {
+            [1] = "Gain Kick"
+        }
+        
+        game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").BuyItem:FireServer(unpack(args))
+    end,
+    ["Punch someone into void"] = function()
+        print("no work lol")
+    end,
+    ["Go into the backrooms"] = function()
+        print("go into the backrooms quest")
+
+        local args = {
+            [1] = "Find The Backrooms"
+        }
+
+        game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").RequestQuestEvent:InvokeServer(unpack(args))
+        task.wait(1)
+        local CFrameTemp = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-122.280617, 16.2967186, -118.725983, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        task.wait(1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameTemp
+    end
+}
+
+Section4:Dropdown({
+    Text = "Quest",
+    List = {"Wood shack", "Punch someone into void", "Go into the backrooms"},
+    Callback = function(quest)
+        selectedQuest = quest
+    end
+})
+
+Section4:Button({
+    Text = ("Complete quest"),
+    Callback = function()
+        quest_functions[selectedQuest]()
+    end
+})
+
 Section4:Button({
     Text = ("Remove nametag"),
     Callback = RemoveNametag
