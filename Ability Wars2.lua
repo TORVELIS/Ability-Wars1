@@ -333,6 +333,22 @@ local tab3 = Window:Tab({
 
 
 local Section4 = tab3:Section({
+   Text = "Special",
+   Side = "Left",
+})
+
+Section4:Button({
+    Text = "Collect all gifts",
+    Callback = function()
+        for i,v in pairs(game:GetService("Workspace")["Collectable Presents"]:GetChildren()) do
+        wait(.5)
+        fireclickdetector(v.ClickDetector, 0)
+
+end
+    end
+})
+
+local Section4 = tab3:Section({
    Text = "Main",
    Side = "Left",
 })
