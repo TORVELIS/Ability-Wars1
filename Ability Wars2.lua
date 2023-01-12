@@ -7,7 +7,7 @@ getgenv().hitbox_extender = false
 getgenv().visibleHMR = false
 getgenv().PlatformAdd = nil
 getgenv().distance_from_target = -3
-
+local hitboxsize = 20
 -- other lol
 
 local function RejoinGame()
@@ -126,7 +126,7 @@ local function ExtendHMR()
             if target_char then
                 local target_hmr = target_char:FindFirstChild("HumanoidRootPart")
                 if target_hmr then
-                    target_hmr.Size = Vector3.new(20,20,20)
+                    target_hmr.Size = Vector3.new(hitboxsize,hitboxsize,hitboxsize)
                     if getgenv().visibleHMR then
                         target_hmr.Transparency = 0.7
                         target_hmr.Color = Color3.fromRGB(255,0,0)
@@ -268,6 +268,16 @@ Section2:Check({
     Text = "Visible hitboxes",
     Callback = function(bool)
         getgenv().visibleHMR = bool
+    end
+})
+
+Section2:Slider({
+    Text = "Hitbox size",
+    Minimum = 3,
+    Default = 20,
+    Maximum = 20,
+    Callback = function(S)
+       hitboxsize = S
     end
 })
 
