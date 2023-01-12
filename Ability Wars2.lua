@@ -347,16 +347,16 @@ local Section4 = tab3:Section({
    Side = "Left",
 })
 
-Section4:Button({
-    Text = "Collect all gifts",
-    Callback = function()
-        for i,v in pairs(game:GetService("Workspace")["Collectable Presents"]:GetChildren()) do
-        wait(.5)
-        fireclickdetector(v.ClickDetector, 0)
+-- Section4:Button({
+--     Text = "Collect all gifts",
+--     Callback = function()
+--         for i,v in pairs(game:GetService("Workspace")["Collectable Presents"]:GetChildren()) do
+--         wait(.5)
+--         fireclickdetector(v.ClickDetector, 0)
 
-end
-    end
-})
+-- end
+--     end
+-- })
 
 local Section4 = tab3:Section({
    Text = "Main",
